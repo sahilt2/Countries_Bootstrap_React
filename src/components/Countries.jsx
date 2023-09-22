@@ -6,12 +6,13 @@ import Row from 'react-bootstrap/Row';
 import { useDispatch, useSelector } from 'react-redux';
 import CountryCard from './CountryCard';
 import { initializeCountries } from '../features/countries/countriesSlice';
+import Spinner from 'react-bootstrap/Spinner';
+
 
 const Countries = () => {
   const dispatch = useDispatch();
   const countriesList = useSelector((state)=>state.countries.countries);
   const loading = useSelector((state)=>state.countries.isLoading);
-  const [filterCountries,setFilterCountries]=useState(countriesList)
   const [search, setSearch] = useState('')
 
   console.log("CountriesList: ", countriesList)
@@ -23,9 +24,7 @@ const Countries = () => {
 
   console.log('loading:',loading);
 
-  useEffect(()=>{
-    setFilterCountries(countriesList.filter((country)=>country.name.common.toLowerCase().includes(search)))
-  },[search])
+ const filterCountries = countriesList.filter((country)=>country.name.common.toLowerCase().includes(search.toLocaleLowerCase()))
   console.log('filterlist: ',filterCountries);
 
   return (
@@ -44,8 +43,15 @@ const Countries = () => {
           </Form>
         </Col>
       </Row>
+       {/* reducer method */}
+            {/* {countriesList.reduce((acc, country) => {
+            if (country.name.official.toLowerCase().includes(search.toLowerCase())) {
+             acc.push(<CountryCard key={country.name} country={country} />);
+          }
+          return acc;
+          }, [])} */}
       {loading?(
-        <p>Loading...</p>):(
+        <Spinner animation="grow" />):(
       <Row xs={2} md={3} lg={4} className=" g-3">
      {filterCountries.map((country)=>{
       return (
