@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, ListGroup, Row } from 'react-bootstrap';
+import { Card, Col, ListGroup} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const CountryCard = ({country}) => {
@@ -21,12 +21,21 @@ const CountryCard = ({country}) => {
                       variant="flush"
                       className="flex-grow-1 justify-content-end"
                     >
+                    {country.languages?(
                       <ListGroup.Item>
-                        <i className="bi bi-translate me-2"></i>
-                      </ListGroup.Item>
+                        <i className="bi bi-translate me-2"></i>{Object.values(country.languages).join(',')}
+                      </ListGroup.Item>):(
+                        <ListGroup.Item>
+                            No language found
+                        </ListGroup.Item>
+                      )}
+                      {country.currencies?(
                       <ListGroup.Item>
-                        <i className="bi bi-cash-coin me-2"></i>
-                      </ListGroup.Item>
+                        <i className="bi bi-cash-coin me-2"></i>{Object.values(country.currencies).map((cur)=>(
+                           <span>{cur.name} ({cur.symbol})</span>))}
+                      </ListGroup.Item>):(
+                        <ListGroup.Item>No currency found</ListGroup.Item>
+                      )}
 
                       <ListGroup.Item>
                         <i className="bi bi-people me-2">   {country.population}</i>
