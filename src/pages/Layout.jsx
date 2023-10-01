@@ -8,6 +8,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Button } from 'react-bootstrap';
 import { auth, logOut } from '../auth/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import Footer from '../components/Footer';
 
 const Layout = () => {
   const [user] = useAuthState(auth)
@@ -25,6 +26,9 @@ const Layout = () => {
                 <LinkContainer to="/countries">
                   <Nav.Link>Countries</Nav.Link>
                 </LinkContainer>
+                <LinkContainer to="/favourites">
+                  <Nav.Link>Favourites</Nav.Link>
+                </LinkContainer>
                 <LinkContainer to="/login">
                   <Nav.Link>Login</Nav.Link>
                 </LinkContainer>
@@ -34,15 +38,16 @@ const Layout = () => {
               </Nav>
             </Navbar.Collapse>
             {user?(<Button onClick={logOut}>Logout</Button>):(
-              <Button><Link to='/login'></Link>Login</Button>
-            )}
-            
+              <Link to='/login'><Button>Login</Button></Link>
+            )} 
           </Container>
         </Navbar>
       </Row>
       <Row>
-        <Outlet />
+        <Outlet/>
+        <Footer/>
       </Row>
+      
     </Container>
   );
 };
