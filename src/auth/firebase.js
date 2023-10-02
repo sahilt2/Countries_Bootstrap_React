@@ -53,4 +53,14 @@ const logOut = () =>{
     signOut(auth)
 }
 
+export const addFavouriteToFirebase=async(uid,name)=>{
+    try{
+        await addDoc(collection(db,`users/${uid}/favourites`),{name});
+        console.log("favs added to firebase");
+    }
+    catch(err){
+        console.error("Error adding favs to database: ",err);
+    }
+}
+
 export {auth,db,loginWithEmailAndPassword,registerWithEmailAndPassword,logOut};
