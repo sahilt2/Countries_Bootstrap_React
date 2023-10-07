@@ -1,11 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { addFavouriteToFirebase, auth, clearFavouritesFromFirebase, db, removeFavouriteFromFirebase } from "../../auth/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
-const favourites = localStorage.getItem('favourites')!==null?JSON.parse(localStorage.getItem('favourites')):[]
+// This is initialisation of favourites from local storage
+// commented, since we are using firebase database now
+
+// const favourites = localStorage.getItem('favourites')!==null?JSON.parse(localStorage.getItem('favourites')):[]
+
+export const getFavouritesFromSource = () =>
+async (dispatch) => {
+const user = auth.currentUser
+if (user) {
+const q = await getDocs(collection(db, `users/${user.uid}/favourites`));
+const favourites = q.docs.map((doc) => doc.data().name);
+dispatch(getfavourites(favourites));
+dispatch(isLoading(false));
+}
+};
 
 export const favouriteSlice = createSlice({
     name:'favourites',
     initialState:{
-        favourites:favourites
+        favourites:[],
+        isLoading:true
     },
     reducers:{
         addFavourites:(state,action)=>{
@@ -13,19 +30,38 @@ export const favouriteSlice = createSlice({
             if(state.favourites.some(fav=>fav===action.payload))state.favourites=[...state.favourites]
             state.favourites=[...state.favourites,action.payload]
             localStorage.setItem('favourites',JSON.stringify(state.favourites))
+            const user = auth.currentUser
+            if(user){
+                addFavouriteToFirebase(user.uid,action.payload);
+            }
         },
         removeFavourite(state,action){
             const newArray =[...state.favourites]
             newArray.splice(newArray.findIndex(e=>e===action.payload),1)
             state.favourites=[...newArray]
-            localStorage.setItem('favourites',JSON.stringify(state.favourites))
+            localStorage.setItem('favourites',JSON.stringify(state.favourites));
+            const user = auth.currentUser
+            if(user){
+                removeFavouriteFromFirebase(user.uid,action.payload)
+            }
         },
         clearFavourites(state,action){
             localStorage.removeItem('favourites')
             state.favourites=[]
+            const user = auth.currentUser;
+            if (user) {
+                 clearFavouritesFromFirebase(user.uid);
+            }
+        },
+        isLoading(state,action){
+            state.isLoading=action.payload;
+        },
+        getfavourites(state,action){
+            state.favourites=action.payload;
         }
     }
 })
-export const {addFavourites,removeFavourite,clearFavourites}=favouriteSlice.actions
+
+export const {addFavourites,removeFavourite,clearFavourites,isLoading,getfavourites}=favouriteSlice.actions
 
 export default favouriteSlice.reducer;
