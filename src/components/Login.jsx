@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router';
 import { auth, loginWithEmailAndPassword } from '../auth/firebase';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import {
     MDBBtn,
@@ -12,7 +11,6 @@ import {
     MDBCard,
     MDBCardBody,
     MDBInput,
-    MDBIcon
   }
   from 'mdb-react-ui-kit';
 
@@ -29,21 +27,6 @@ const Login = () => {
 
     return (
         <div>
-             {/* <input 
-            type="email" 
-            value={email} 
-            onChange={(e)=>setEmail(e.target.value)}
-            placeholder='Email'/>
-            <input 
-            type="password" 
-            value={password} 
-            onChange={(e)=>setPassword(e.target.value)}
-            placeholder='Password'/>
-            <Button onClick={()=>loginWithEmailAndPassword(email,password)}>Login</Button>
-            <div>
-                Don't have an account?
-                <Link to='/register'>Register</Link>
-            </div> */}
             <MDBContainer fluid className='d-flex align-items-center justify-content-center bg-image' style={{backgroundImage: 'linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)'}}>
 
             <MDBRow className='d-flex justify-content-center align-items-center h-100'>
@@ -60,21 +43,6 @@ const Login = () => {
           <MDBBtn outline className='mx-2 px-5' size='lg' onClick={()=>loginWithEmailAndPassword(email,password)}>
           Login
          </MDBBtn>
-{/* 
-        <div className='d-flex flex-row mt-3 mb-5'>
-          <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
-            <MDBIcon fab icon='facebook-f' size="lg"/>
-          </MDBBtn>
-
-          <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
-            <MDBIcon fab icon='twitter' size="lg"/>
-          </MDBBtn>
-
-          <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
-            <MDBIcon fab icon='google' size="lg"/>
-          </MDBBtn>
-        </div> */}
-
         <div>
           <p className="mb-0 mt-3">Don't have an account? <Link to='/register'>Register</Link></p>
         </div>

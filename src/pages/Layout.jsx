@@ -46,8 +46,7 @@ const Layout = () => {
       <Row>
         <Outlet/>
         <Footer/>
-      </Row>
-      
+        </Row> 
     </Container>
   );
 };
