@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row,Image, Col, Button } from 'react-bootstrap';
-import { useLocation,useNavigate } from 'react-router-dom';
+import { Container, Row,Image, Col, Button, ListGroup } from 'react-bootstrap';
+import { Link, useLocation,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Spinner from 'react-bootstrap/Spinner';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const CountriesSingle = () => {
   // Function hooks
@@ -32,6 +33,8 @@ useEffect(()=>{
   })
   }
 },[country.capital])
+
+const borders = country.borders ?? {};
 
 console.log("weather",weather);
 
@@ -63,6 +66,19 @@ if(loading){
           </div>
         )}
         </Col>
+        {borders.length > 0 && (
+        <Col>
+          <h4>Bordering Countries:</h4>
+          <ListGroup>
+            {borders.map((borderCountry, index) => (
+              <ListGroup.Item key={index}>
+                  {borderCountry}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        </Col>
+
+       )}
       </Row>
       <Row>
         <Col>

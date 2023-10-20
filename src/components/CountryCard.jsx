@@ -11,7 +11,7 @@ const CountryCard = ({country}) => {
         <div>
             <Col className="mt-5">
               <LinkContainer
-                to={`/countries/${country.name.common}`}
+                to={`/countries/${country.cca3}`}
                 state={{ country: country }}
               >
                 <Card className="h-100">
