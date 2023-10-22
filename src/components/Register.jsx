@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import {useAuthState} from "react-firebase-hooks/auth"
 import { auth, registerWithEmailAndPassword } from '../auth/firebase';
-import { Button } from 'react-bootstrap';
+
 import { Link } from 'react-router-dom';
 import {
     MDBBtn,
@@ -10,7 +10,6 @@ import {
     MDBCard,
     MDBCardBody,
     MDBInput,
-    MDBCheckbox
   }
   from 'mdb-react-ui-kit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -40,7 +39,7 @@ const Register = () => {
 
     return (
         <div>
-            <MDBContainer fluid className='d-flex align-items-center justify-content-center bg-image min-vh-100' style={{backgroundImage: 'linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)'}} >
+            <MDBContainer fluid className='d-flex align-items-center justify-content-center bg-image min-vh-100' style={{backgroundImage: 'linear-gradient(to right, #434343 0%, black 100%)'}} >
       <div className='mask gradient-custom-3'></div>
       <MDBCard className='m-5' style={{maxWidth: '600px', borderRadius:'1rem'}}>
         <MDBCardBody className='px-5'>
