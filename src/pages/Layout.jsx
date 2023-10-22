@@ -48,7 +48,7 @@ const Layout = () => {
       <Row style={{ flex: 1 }}>
         <Outlet/>
         </Row>
-        <Row className='sm py-5 bg-dark text-center'>
+        {/* <Row className='sm py-5 bg-dark text-center'>
         <div className='footer' style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <small className='text-white-50'>&copy; Copyright Sahil's Countries App 2023  </small>
           <div className='icons mx-5'>
@@ -57,7 +57,7 @@ const Layout = () => {
             <a href='https://www.instagram.com/countries_pictures/' target="_blank" rel="noreferrer"><FaInstagram className='icon fs-4 mx-2 text-success' /></a>
           </div>
         </div>
-      </Row> 
+      </Row>  */}
     </Container>
     </div>
   );

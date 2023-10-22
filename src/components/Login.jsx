@@ -27,7 +27,7 @@ const Login = () => {
 
     return (
         <div>
-            <MDBContainer fluid className='d-flex align-items-center justify-content-center bg-image' style={{backgroundImage: 'linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)'}}>
+            <MDBContainer fluid className='d-flex align-items-center justify-content-center bg-image min-vh-100' style={{backgroundImage: 'linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%)'}}>
 
             <MDBRow className='d-flex justify-content-center align-items-center h-100'>
            <MDBCol col='12'>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row,Image, Col, Button, ListGroup } from 'react-bootstrap';
+import { Container, Row,Image, Col, Button, ListGroup, } from 'react-bootstrap';
 import { Link, useLocation,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Spinner from 'react-bootstrap/Spinner';
-import { LinkContainer } from 'react-router-bootstrap';
+import { useSelector } from 'react-redux';
 
 const CountriesSingle = () => {
   // Function hooks
@@ -14,6 +14,7 @@ const navigate = useNavigate();
 const [weather,setWeather] = useState('');
 const [error,setError]=useState(false);
 const [loading, setLoading] = useState(true);
+const countriesList = useSelector((state)=>state.countries.countries);
 
 // Destructuring variable
 const country = location.state.country;
@@ -34,7 +35,7 @@ useEffect(()=>{
   }
 },[country.capital])
 
-const borders = country.borders ?? {};
+const borders = Object.values(country.borders ?? {});
 
 console.log("weather",weather);
 
@@ -65,24 +66,38 @@ if(loading){
           <img src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt={`${weather.weather[0].description}`}/>
           </div>
         )}
-        </Col>
-        {borders.length > 0 && (
-        <Col>
-          <h4>Bordering Countries:</h4>
-          <ListGroup>
-            {borders.map((borderCountry, index) => (
-              <ListGroup.Item key={index}>
-                  {borderCountry}
+                {borders.length > 0 && (
+        <div>
+          <h4>Borders:</h4>
+            {borders.map((border) => {  
+          const borderList = countriesList.find((country)=>country.cca3 === border)
+          if (borderList){
+            return (
+              <ListGroup.Item
+              key ={borderList.cca3}>
+               <Link 
+               to={`/countries/${borderList.name.common}`} 
+               state={{country:borderList}}
+               style={{color:'teal',textDecoration:'none'}}>
+               {borderList.name.common}
+               </Link> 
               </ListGroup.Item>
-            ))}
-          </ListGroup>
-        </Col>
+            )
+          }
+          return null;
+        }                  
+          )
+          }
+      
+        </div>
 
        )}
+        </Col>
+
       </Row>
-      <Row>
+      <Row className='mt-3'>
         <Col>
-        <Button variant='primary' onClick={()=>navigate('/countries')}>
+        <Button variant='primary' onClick={()=>navigate('/countries')} >
           Back to Countries
         </Button>
         </Col>

@@ -18,6 +18,7 @@ const Favourites = () => {
     else {
         countriesList = []
     }
+    console.log('favourites: ',favouritesList);
     useEffect(() => {
         dispatch(initializeCountries())
         dispatch(getFavouritesFromSource)
@@ -59,7 +60,7 @@ const Favourites = () => {
         <Row xs={2} md={3} lg={4} className=" g-3">
           {countriesList
             .filter((c) => {
-              return c.name.official.toLowerCase().includes(search.toLowerCase());
+              return c.name.common.toLowerCase().includes(search.toLowerCase());
             })
             .map((country) => (
               <CountryCard key={country.name.common} country={country} />
