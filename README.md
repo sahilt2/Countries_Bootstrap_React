@@ -30,13 +30,13 @@ npm install
 npm start
 ```
 
-Create an .env file , update keys config from [Open Weather map ]('https://openweathermap.org/api') api
+Create an .env file , update keys config from [Open Weather map ](https://openweathermap.org/api) api
 
 ## Screenshots
 
 ## Acknowledgement
 
-Thank You [Martin Holland]('https://github.com/martin-holland') for the guidance
+Thank You [Martin Holland](https://github.com/martin-holland) for the guidance
 
 #### Note
 
