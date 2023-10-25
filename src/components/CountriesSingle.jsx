@@ -37,7 +37,7 @@ useEffect(()=>{
 
 const borders = Object.values(country.borders ?? {});
 
-console.log("weather",weather);
+// console.log("weather",weather);
 
 if(loading){
   return(

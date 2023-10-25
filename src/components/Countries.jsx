@@ -15,17 +15,17 @@ const Countries = () => {
   const loading = useSelector((state)=>state.countries.isLoading);
   const [search, setSearch] = useState('')
 
-  console.log("CountriesList: ", countriesList)
-  console.log("Search: ", search)
+  // console.log("CountriesList: ", countriesList)
+  // console.log("Search: ", search)
 
   useEffect(()=>{
     dispatch(initializeCountries())
   },[dispatch])
 
-  console.log('loading:',loading);
+  // console.log('loading:',loading);
 
  const filterCountries = countriesList.filter((country)=>country.name.common.toLowerCase().includes(search.toLocaleLowerCase()))
-  console.log('filterlist: ',filterCountries);
+  // console.log('filterlist: ',filterCountries);
 
   return (
     <Container fluid>
